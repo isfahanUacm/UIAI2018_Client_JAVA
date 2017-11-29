@@ -73,9 +73,9 @@ public class Game
         {
             try
             { 
-                String response = "";
+                String[] response = new String[4];
                 for(int i=0;i<4;i++)
-                    response += in.nextLine();
+                    response[i] = in.nextLine();
                 play_round(response);
             }
             catch(Exception e)
@@ -85,9 +85,9 @@ public class Game
         }
     }
     
-    public void play_round(String response) throws Exception
+    public void play_round(String [] response) throws Exception
     {
-        String [] lines = response.split("\n");
+        String [] lines = response;
         
         String [] self = lines[0].split(",");
         for(int i=0;i<5;i++)
