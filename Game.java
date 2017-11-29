@@ -73,7 +73,10 @@ public class Game
         {
             try
             { 
-                play_round(in.next());
+                String response = "";
+                for(int i=0;i<4;i++)
+                    response += in.nextLine();
+                play_round(response);
             }
             catch(Exception e)
             {
