@@ -16,8 +16,8 @@ public class Game
     private final Team opp_team;
     private int cycle_no;
     
-    private String inet_address;
-    private int port;
+    private final String inet_address;
+    private final int port;
     
     private Socket socket;
     private Scanner in;
@@ -94,8 +94,8 @@ public class Game
         {
             String [] pos = self[i].split(":");
             my_team.getPlayer(i).setPosition(new 
-                            Position(Double.valueOf(pos[0]),
-                                Double.valueOf(pos[1])));
+                            Position(Double.parseDouble(pos[0]),
+                                Double.parseDouble(pos[1])));
         }
         
         String [] opp = lines[1].split(",");
@@ -103,14 +103,14 @@ public class Game
         {
             String [] pos = opp[i].split(":");
             opp_team.getPlayer(i).setPosition(new 
-                            Position(Double.valueOf(pos[0]),
-                                Double.valueOf(pos[1])));
+                            Position(Double.parseDouble(pos[0]),
+                                Double.parseDouble(pos[1])));
         }
         
         String [] ball_s = lines[2].split(":");
         ball.setPosition(new 
-                 Position(Integer.valueOf(ball_s[0]),
-                         Integer.valueOf(ball_s[1])));
+                 Position(Double.parseDouble(ball_s[0]),
+                         Double.parseDouble(ball_s[1])));
         
         String [] score = lines[3].split(",");
         my_team.setScore(Integer.parseInt(score[0]));
@@ -122,7 +122,7 @@ public class Game
     
     public void kick(Triple triple)
     {
-        out.write(triple.toString());
+        out.write(triple.toString()+"\n");
         out.flush();
     }
     
