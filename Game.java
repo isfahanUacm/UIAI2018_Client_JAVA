@@ -24,8 +24,7 @@ public class Game
     private PrintWriter out;
     
     
-    public Game(String inet_address,int port)
-    {
+    public Game(String inet_address, int port){
         ball = new Ball();
         my_team = new Team();
         opp_team = new Team();
@@ -34,25 +33,31 @@ public class Game
         this.port = port;
     }
     
-    public boolean connect_to_server()
-    {
-        try
-        {
+    private boolean first = true;
+    
+    public void trig(String team_name, File team_logo) throws Exception{
+        if(first) {
+            if(connect_to_server()){
+                start(team_name, team_logo);
+                first = false;
+            }
+        }
+        else throw new Exception("Game is already triggered!");
+    }
+    
+    private boolean connect_to_server(){
+        try{
             socket = new Socket(inet_address,port);
             out = new PrintWriter(socket.getOutputStream(),true);
             in = new Scanner(new InputStreamReader(socket.getInputStream()));
-        }
-        catch(Exception e)
-        {
+        }catch(Exception e){
             e.printStackTrace();
             return false;
         }
-             
         return true;
     }
     
-    public void start(String team_name,File team_logo)
-    {
+    private void start(String team_name, File team_logo){
         out.write("register "+team_name+" \n");
         // @TODO write team_logo : 
         out.write("logo null \n");
@@ -69,29 +74,24 @@ public class Game
         out.write(formation);
         out.flush();
         
-        while(true)
-        {
-            try
-            { 
+        while(true){
+            try{ 
                 String[] response = new String[4];
                 for(int i=0;i<4;i++)
                     response[i] = in.nextLine();
                 play_round(response);
             }
-            catch(Exception e)
-            {
+            catch(Exception e){
                 e.printStackTrace();
             }
         }
     }
     
-    public void play_round(String [] response) throws Exception
-    {
+    private void play_round(String [] response) throws Exception{
         String [] lines = response;
         
         String [] self = lines[0].split(",");
-        for(int i=0;i<5;i++)
-        {
+        for(int i=0;i<5;i++){
             String [] pos = self[i].split(":");
             my_team.getPlayer(i).setPosition(new 
                             Position(Double.parseDouble(pos[0]),
@@ -99,8 +99,7 @@ public class Game
         }
         
         String [] opp = lines[1].split(",");
-        for(int i=0;i<5;i++)
-        {
+        for(int i=0;i<5;i++){
             String [] pos = opp[i].split(":");
             opp_team.getPlayer(i).setPosition(new 
                             Position(Double.parseDouble(pos[0]),
@@ -120,29 +119,24 @@ public class Game
         kick(Strategy.do_turn(this));
     }
     
-    public void kick(Triple triple)
-    {
+    private void kick(Triple triple){
         out.write(triple.toString()+"\n");
         out.flush();
     }
     
-    public Ball getBall() 
-    {
-        return ball;
+    public Ball getBall() {
+        return ball.clone();
     }
     
-    public Team getMyTeam()
-    {
-        return my_team;
+    public Team getMyTeam(){
+        return my_team.clone();
     }
     
-    public Team getOppTeam()
-    {
-        return opp_team;
+    public Team getOppTeam(){
+        return opp_team.clone();
     }
     
-    public int getCycle()
-    {
+    public int getCycle(){
         return cycle_no;
     }
 }

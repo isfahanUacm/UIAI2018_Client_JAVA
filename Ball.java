@@ -3,22 +3,25 @@
  * @author mdsinalpha
  */
  
-public class Ball 
-{
+public class Ball{
+    
     private Position position;
 
-    public Ball() 
-    {
+    public Ball(){
         position = new Position(0,0);
     }
     
-    public void setPosition(Position position)
-    {
+    public Ball setPosition(Position position){
         this.position = position;
+        return this;
     }
 
-    public Position getPosition() 
-    {
+    public Position getPosition(){
         return position;
+    }
+    
+    @Override
+    public Ball clone(){
+        return new Ball().setPosition(position.clone());
     }
 }
