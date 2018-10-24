@@ -48,8 +48,8 @@ public class Game
     
     private boolean connect_to_server(){
         try{
-            socket = new Socket(inet_address,port);
-            out = new PrintWriter(socket.getOutputStream(),true);
+            socket = new Socket(inet_address, port);
+            out = new PrintWriter(socket.getOutputStream(), true);
             in = new Scanner(new InputStreamReader(socket.getInputStream()));
         }catch(Exception e){
             e.printStackTrace();
@@ -60,7 +60,7 @@ public class Game
     
     private void start(String team_name, File team_logo){
         out.write("register "+team_name+" \n");
-        // @TODO write team_logo : 
+        //@TODO write team_logo : 
         out.write("logo null \n");
         
         Player[] players_formation = Strategy.init_players();
@@ -95,22 +95,19 @@ public class Game
         for(int i=0;i<5;i++){
             String [] pos = self[i].split(":");
             my_team.getPlayer(i).setPosition(new 
-                            Coordinate(Double.parseDouble(pos[0]),
-                                Double.parseDouble(pos[1])));
+                            Coordinate(Double.parseDouble(pos[0]), Double.parseDouble(pos[1])));
         }
         
         String [] opp = lines[1].split(",");
         for(int i=0;i<5;i++){
             String [] pos = opp[i].split(":");
             opp_team.getPlayer(i).setPosition(new 
-                            Coordinate(Double.parseDouble(pos[0]),
-                                Double.parseDouble(pos[1])));
+                            Coordinate(Double.parseDouble(pos[0]), Double.parseDouble(pos[1])));
         }
         
         String [] ball_s = lines[2].split(":");
         ball.setPosition(new 
-                 Coordinate(Double.parseDouble(ball_s[0]),
-                         Double.parseDouble(ball_s[1])));
+                 Coordinate(Double.parseDouble(ball_s[0]), Double.parseDouble(ball_s[1])));
         
         String [] score = lines[3].split(",");
         my_team.setScore(Integer.parseInt(score[0]));

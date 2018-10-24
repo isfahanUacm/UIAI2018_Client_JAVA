@@ -9,7 +9,7 @@ public class Triple{
     private int angle;
     private int power;
     
-    public Triple(int player_id,int angle,int power){
+    public Triple(int player_id, int angle, int power){
         this.player_id = player_id;
         this.angle = angle;
         this.power = power;
@@ -33,7 +33,6 @@ public class Triple{
     
     @Override
     public String toString(){
-        return player_id + "," + angle + ","
-                + power ;
+        return player_id + "," + angle + "," + power;
     }
 }
