@@ -3,6 +3,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import org.locationtech.jts.geom.Coordinate;
 
 /**
  *
@@ -94,7 +95,7 @@ public class Game
         for(int i=0;i<5;i++){
             String [] pos = self[i].split(":");
             my_team.getPlayer(i).setPosition(new 
-                            Position(Double.parseDouble(pos[0]),
+                            Coordinate(Double.parseDouble(pos[0]),
                                 Double.parseDouble(pos[1])));
         }
         
@@ -102,13 +103,13 @@ public class Game
         for(int i=0;i<5;i++){
             String [] pos = opp[i].split(":");
             opp_team.getPlayer(i).setPosition(new 
-                            Position(Double.parseDouble(pos[0]),
+                            Coordinate(Double.parseDouble(pos[0]),
                                 Double.parseDouble(pos[1])));
         }
         
         String [] ball_s = lines[2].split(":");
         ball.setPosition(new 
-                 Position(Double.parseDouble(ball_s[0]),
+                 Coordinate(Double.parseDouble(ball_s[0]),
                          Double.parseDouble(ball_s[1])));
         
         String [] score = lines[3].split(",");

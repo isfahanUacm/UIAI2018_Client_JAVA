@@ -1,3 +1,5 @@
+import org.locationtech.jts.geom.Coordinate;
+
 /**
  *
  * @author mdsinalpha
@@ -7,7 +9,7 @@ public class Player{
     
     private final int id;
     private final String name;
-    private Position position;
+    private Coordinate position;
     
     public Player(int id){
         this.id = id;
@@ -15,7 +17,7 @@ public class Player{
         position = null;
     }
     
-    public Player(String name,Position position){
+    public Player(String name, Coordinate position){
         id = -1;
         this.name = name;
         this.position = position;
@@ -29,20 +31,20 @@ public class Player{
         return name;
     }
 
-    public Position getPosition(){
+    public Coordinate getPosition(){
         return position;
     }
 
-    public Position getFirstPosition(){
+    public Coordinate getFirstPosition(){
         return Strategy.init_players()[id].getPosition();
     }
     
-    public void setPosition(Position position){
+    public void setPosition(Coordinate position){
         this.position = position;
     }
     
     @Override
     public Player clone(){
-        return (id==-1?new Player(name, position.clone()):new Player(id));
+        return (id==-1?new Player(name, (Coordinate)position.clone()):new Player(id));
     }
 }

@@ -1,3 +1,5 @@
+import org.locationtech.jts.geom.Coordinate;
+
 /**
  *
  * @author mdsinalpha
@@ -5,23 +7,23 @@
  
 public class Ball{
     
-    private Position position;
+    private Coordinate position;
 
     public Ball(){
-        position = new Position(0,0);
+        position = new Coordinate(0,0);
     }
     
-    public Ball setPosition(Position position){
+    public Ball setPosition(Coordinate position){
         this.position = position;
         return this;
     }
 
-    public Position getPosition(){
+    public Coordinate getPosition(){
         return position;
     }
     
     @Override
     public Ball clone(){
-        return new Ball().setPosition(position.clone());
+        return new Ball().setPosition((Coordinate)position.clone());
     }
 }
